@@ -1,8 +1,11 @@
-sky:
+pld:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     host: localhost
     port: 3306
-    database: sky_take_out
+    database: pld
     username: root
-    password: root
+    password: 123456
+wechat:
+    appid: wxdbac2714b7c4c4e1
+    secret: 6011f580d4bc424e139c41bc6b6e0493
