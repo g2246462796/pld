@@ -2,16 +2,15 @@ package com.pld.controller;
 
 
 import com.pld.dto.BookDTO;
+import com.pld.dto.BookPageQueryDTO;
+import com.pld.result.PageResult;
 import com.pld.result.Result;
 import com.pld.service.BookService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user/book")
@@ -27,6 +26,20 @@ public class BookController {
         log.info("上传书籍：{}", bookDTO);
         bookService.upload(bookDTO);
         return Result.success();
+    }
+
+    /**
+     * 书籍分页查询
+     *
+     * @param bookPageQueryDTO
+     * @return
+     */
+    @GetMapping("/page")
+    @ApiOperation("书籍分页查询")
+    public Result<PageResult> page(BookPageQueryDTO bookPageQueryDTO) {
+        log.info("书籍分页查询:{}", bookPageQueryDTO);
+        PageResult pageResult = bookService.pageQuery(bookPageQueryDTO);//后绪步骤定义
+        return Result.success(pageResult);
     }
 
 

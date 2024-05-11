@@ -6,4 +6,26 @@
         insert into book (id, name, ISBN, college, major, loaction, `desc`, donate_time, status, donor_id)
         values (#{id},#{name},#{ISBN},#{college},#{major},#{location},#{desc},#{donateTime},#{status},#{donorId})
     </insert>
+
+    <select id="pageQuery" resultType="com.pld.vo.BookVO">
+        select b.* from book as b
+        <where>
+            <if test="name != null">
+                and b.name like concat('%',#{name},'%')
+            </if>
+            <if test="location != null">
+                and b.location = #{location}
+            </if>
+            <if test="college != null">
+                and b.college = #{college}
+            </if>
+            <if test="major != null">
+                and b.major = #{major}
+            </if>
+            <if test="status != null">
+                and b.status = #{status}
+            </if>
+        </where>
+        order by b.donate_time desc
+    </select>
 </mapper>
