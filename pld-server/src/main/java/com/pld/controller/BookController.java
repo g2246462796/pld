@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user/book")
-@Api(tags = "书籍相关接口")
+@Api(tags = "C端-书籍相关接口")
 @Slf4j
 public class BookController {
     @Autowired
@@ -42,7 +42,30 @@ public class BookController {
         return Result.success(pageResult);
     }
 
+    /**
+     * 书籍收藏
+     * @param bookID
+     * @return
+     */
+    @GetMapping("/star")
+    @ApiOperation("书籍收藏")
+    public Result<Result> star(Long bookID) {
+        log.info("书籍收藏:{}", bookID);
+        bookService.star(bookID);
+        return Result.success();
+    }
 
-
+    /**
+     * 书籍取消收藏
+     * @param bookID
+     * @return
+     */
+    @DeleteMapping("/unstar")
+    @ApiOperation("书籍取消收藏")
+    public Result<Result> unstar(Long bookID) {
+        log.info("书籍取消收藏:{}", bookID);
+        bookService.unstar(bookID);
+        return Result.success();
+    }
 
 }

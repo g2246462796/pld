@@ -28,4 +28,14 @@
         </where>
         order by b.donate_time desc
     </select>
+
+    <insert id="star" useGeneratedKeys="true" keyProperty="id">
+        insert into stars (id, book_id,user_id)
+        values (#{id},#{bookId},#{userId})
+    </insert>
+
+    <delete id="unstar">
+        delete from stars
+        where book_id = #{bookId} and user_id = #{userId}
+    </delete>
 </mapper>

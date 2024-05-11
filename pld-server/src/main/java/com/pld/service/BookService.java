@@ -20,4 +20,15 @@ public interface BookService {
      * @return
      */
     PageResult pageQuery(BookPageQueryDTO bookPageQueryDTO);
+
+    /**
+     * 书籍收藏
+     */
+    public void star(Long bookID);
+
+    /**
+     * 书籍取消收藏
+     * @param bookID
+     */
+    public void unstar(Long bookID);
 }

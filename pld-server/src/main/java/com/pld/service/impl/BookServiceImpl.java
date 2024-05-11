@@ -6,6 +6,7 @@ import com.pld.context.BaseContext;
 import com.pld.dto.BookDTO;
 import com.pld.dto.BookPageQueryDTO;
 import com.pld.entity.Book;
+import com.pld.entity.Star;
 import com.pld.mapper.BookMapper;
 import com.pld.result.PageResult;
 import com.pld.service.BookService;
@@ -38,11 +39,30 @@ public class BookServiceImpl implements BookService {
         bookMapper.insert(book);
     }
 
-
     public PageResult pageQuery(BookPageQueryDTO bookPageQueryDTO) {
         PageHelper.startPage(bookPageQueryDTO.getPage(), bookPageQueryDTO.getPageSize());
         Page<BookVO> page = bookMapper.pageQuery(bookPageQueryDTO);//后绪步骤实现
         return new PageResult(page.getTotal(), page.getResult());
+    }
+
+    @Override
+    public void star(Long bookID) {
+        Star star = new Star();
+        star.setBookId(bookID);
+        Long userId = BaseContext.getCurrentId();
+        star.setUserId(userId);
+
+        bookMapper.star(star);
+    }
+
+    @Override
+    public void unstar(Long bookID) {
+        Star star = new Star();
+        star.setBookId(bookID);
+        Long userId = BaseContext.getCurrentId();
+        star.setUserId(userId);
+
+        bookMapper.unstar(star);
     }
 
 }
